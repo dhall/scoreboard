@@ -5,38 +5,44 @@
 	<title>Vets.gov Team Progress</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 	<style>
-	canvas {
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-	}
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+		body {
+			font-family: arial, helvetica, sans-serif;
+		}
+		.current-score {
+			width: 80%;
+			text-align: center;
+			font-size: 50px;
+		}
 	</style>
 </head>
 
 <body>
-	<div style="width: 100%">
-		<div style="float:left; clear:both; width:50%; margin-top:4px;">
+	<div style="width: 100%;">
+		<h1 id="currentScore" class="current-score">Current Score: </h1>
+		<div style="float:left; clear:both; width:80%; margin-top:4px;">
 			<canvas id="score"></canvas>
 		</div>
-    <div style="float:left; clear:both; width:50%">
-	    <canvas id="issues"></canvas>
-    </div>
-		<div style="float:left; clear:both; width:50%; margin-top:4px;">
-      <canvas id="pull-requests"></canvas>
-    </div>
 	</div>
 	<script>
 		var scoreData = {
 			labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7',
                'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12', 'Week 13', 'Week 14',
-               'Week 15', 'Week 16', 'Week 17', 'Week 18', 'Week 19', 'Week 20', 'Week 21'],
+               'Week 15', 'Week 16', 'Week 17', 'Week 18', 'Week 19', 'Week 20', 'Week 21', 'Week 22'],
 			datasets: [{
-				data: [7,6,8,20.25,10.25,19.75,17.25,21.67,18.33,17.83,12.83,15.17,17.17,14.83,14.33,13.17,16.17,15.67,18.8,15.6,12.2],
+				data: [7,6,8,20.25,10.25,19.75,17.25,21.67,18.33,17.83,12.83,15.17,17.17,14.83,14.33,13.17,16.17,15.67,18.8,15.6,12.2,12],
 				lineTension: 0.1,
 				backgroundColor: '#62b8e0',
 				label: 'Score'
 			}]
 		};
+
+		var data = scoreData["datasets"][0]["data"];
+		var currentScore = data[data.length - 1];
 
 		window.onload = function() {
       var ctx = document.getElementById('score').getContext('2d');
@@ -55,6 +61,7 @@
           responsive: true
         }
       });
+			document.getElementById('currentScore').innerHTML = currentScore;
 		};
 
 	</script>
